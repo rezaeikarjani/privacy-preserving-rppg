@@ -1,0 +1,7 @@
+# Verified in existing Anaconda Python 3.13.5 on macOS arm64
+numpy==2.1.3
+scipy==1.15.3
+pandas==2.2.3
+matplotlib==3.10.0
+opencv-python==4.12.0.88
+pytest==8.3.4

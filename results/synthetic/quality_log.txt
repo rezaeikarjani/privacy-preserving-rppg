@@ -1,0 +1,14 @@
+ ratio_threshold method  variant  windows  valid_windows  flagged_windows  ambiguous_windows  band_edge_windows
+             1.2    POS original        4              4                0                  0                  0
+             1.2    POS     blur        4              4                0                  0                  0
+             1.2    POS pixelate        4              4                0                  0                  0
+             1.2    POS     mask        4              0                4                  0                  0
+             1.2  CHROM original        4              4                0                  0                  0
+             1.2  CHROM     blur        4              4                0                  0                  0
+             1.2  CHROM pixelate        4              4                0                  0                  0
+             1.2  CHROM     mask        4              0                4                  0                  0
+
+Flagged non-mask windows at primary threshold:
+Empty DataFrame
+Columns: [method, variant, video_start_s, video_end_s, baseline_hr_bpm, peak_ratio, status]
+Index: []

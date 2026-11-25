@@ -1,0 +1,10 @@
+{
+  "blur_sigma_fractions": [0.025, 0.05, 0.10],
+  "pixel_grids": [32, 16, 8],
+  "methods": ["POS", "CHROM"],
+  "band_hz": [0.7, 3.0],
+  "window_seconds": 30,
+  "step_seconds": 15,
+  "quality_config": "configs/quality.json",
+  "note": "Exploratory settings fixed before this sweep, after prior inspection of baseline sigma=0.10 and grid=8. No privacy-strength or optimal-setting claim."
+}

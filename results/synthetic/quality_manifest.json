@@ -1,0 +1,23 @@
+{
+  "quality_config": {
+    "ratio_threshold": 1.2,
+    "min_separation_hz": 0.15,
+    "edge_margin_hz": 0.05,
+    "sensitivity_thresholds": [
+      1.1,
+      1.2,
+      1.5
+    ],
+    "note": "Exploratory rules selected after inspecting this recording's failure. No independent validation or clinical confidence probability."
+  },
+  "baseline_sha256": {
+    "results/synthetic/bvp.npz": "84ab800f503cfb94d8d342d3c6cf71f034f3fc018951837107098151c5726791",
+    "results/synthetic/windows.csv": "6900be6160c8be6992e47119d148c90ad9a5c6bc5647bcb82cab1ae8d632ab2f",
+    "results/synthetic/results.csv": "2ed11428be592b2adb254090c60844818a55f3f140c7691c53a6a3534423f67e"
+  },
+  "baseline_unchanged": true,
+  "reference_hr_used": false,
+  "source_offset_s": 0,
+  "spectrum": "same Welch parameters as baseline; 10-second segments, nfft4096",
+  "limitation": "Post-hoc exploratory flag; no rejection/correction, false-positive/negative performance unvalidated."
+}

@@ -1,0 +1,10 @@
+{
+  "subject": "UBFC Dataset2 subject1",
+  "enrollment_times_s": [5, 10, 15],
+  "probe_times_s": [30, 35, 40],
+  "blur_sigma_fraction": 0.1,
+  "pixel_grid": 8,
+  "detection_score_threshold": 0.9,
+  "scope": "One known dataset identity, separate temporal segments of the same recording. No impostors or separate recording session. Descriptive embedding similarity, not identity accuracy or proven anonymity.",
+  "alignment": "Use original landmarks to align transformed probes; attacker-assisted geometry. Separately count successful re-detection on transformed images; failure is not anonymity."
+}

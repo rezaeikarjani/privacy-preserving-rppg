@@ -1,0 +1,7 @@
+{
+  "input": "data/private/consented.mp4", "output": "results/private/consented",
+  "backend": "numpy", "methods": ["POS", "CHROM"],
+  "tracking": "haar_lk", "synthetic": false,
+  "band_hz": [0.7, 3.0], "window_seconds": 10, "step_seconds": 5,
+  "blur_sigma_fraction": 0.10, "pixel_grid": 8, "save_videos": true
+}

@@ -1,0 +1,2 @@
+# Optional public-dataset download helper, installed into a separate local target in this session.
+gdown==6.5.1

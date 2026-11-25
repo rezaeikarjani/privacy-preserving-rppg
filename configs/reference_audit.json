@@ -1,0 +1,10 @@
+{
+  "subjects": ["subject1", "subject3", "subject4"],
+  "primary_band_hz": [0.7, 3.0],
+  "pulse_shape_band_hz": [0.4, 5.0],
+  "prominence_std_fractions": [0.25, 0.5, 1.0],
+  "polarities": [1, -1],
+  "minimum_pulse_distance_s": 0.3333333333333333,
+  "reference_lag_fitting": false,
+  "status": "Post-hoc descriptive audit. Multiple fixed settings/polarities all reported; no estimator is selected using rPPG agreement. No baseline results overwritten."
+}

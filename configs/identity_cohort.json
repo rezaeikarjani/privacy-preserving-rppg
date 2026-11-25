@@ -1,0 +1,30 @@
+{
+  "subjects": [
+    "subject1",
+    "subject3",
+    "subject4"
+  ],
+  "enrollment_times_s": [
+    5,
+    10,
+    15
+  ],
+  "probe_times_s": [
+    30,
+    35,
+    40
+  ],
+  "blur_sigma_fraction": 0.1,
+  "pixel_grid": 8,
+  "detection_threshold": 0.9,
+  "geometry": {
+    "subject1": "results/private/external_ubfc_subject1_roi/tracking.csv",
+    "subject3": "results/private/external_ubfc_subject3_haar/tracking.csv",
+    "subject4": "results/private/external_ubfc_subject4_haar/tracking.csv"
+  },
+  "model_revision": "48b10fa505aeb51fbd127fc60a5c660040e823b7",
+  "scope": "Three-person closed-set temporal-split experiment; same recording per identity, no independent sessions or calibrated verification threshold. Settings fixed before reading new participants embeddings.",
+  "required_gallery": "All three enrollment frames from each person must succeed; otherwise no complete cohort result. Do not optimize times.",
+  "failure_policy": "Keep failed original-probe detections as failures in attempted-probe denominator, not evidence of anonymity.",
+  "alignment": "Original landmarks for transformed embeddings; separate re-detection success counts. No embeddings or face crops saved."
+}

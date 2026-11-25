@@ -1,0 +1,18 @@
+{
+  "dataset": "UBFC Dataset2 subject1",
+  "reason": "Strict automatic baseline aborts on multiple detections at frame0; visual inspection shows actual face plus false positive on patterned shirt.",
+  "target_region_xywh": [
+    250,
+    140,
+    220,
+    210
+  ],
+  "image_size_wh": [
+    640,
+    480
+  ],
+  "selection": "Keep detected boxes with centres inside this fixed manually specified region; preserve ambiguity if more than one remains. No artificial face detection when none exists.",
+  "scope": "Separate ROI-assisted evaluation, not success of the frozen fully automatic pipeline.",
+  "timing": "Region selected from visual detector geometry before external HR results.",
+  "unchanged": "POS, CHROM, filtering, HR estimator, quality rules and reference-HR procedure."
+}

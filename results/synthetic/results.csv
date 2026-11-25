@@ -1,0 +1,9 @@
+data_kind,backend,method,variant,hr_bpm,abs_hr_change_bpm,pearson_original,reference_band_ratio_db,window_hr_mae_bpm,valid_hr_windows
+synthetic_fixture,numpy,POS,original,72.0703125,0.0,0.9999999999999999,9.451845030917598,0.0703125,4
+synthetic_fixture,numpy,POS,blur,72.0703125,0.0,0.999990080560848,9.450529519035289,0.0703125,4
+synthetic_fixture,numpy,POS,pixelate,72.0703125,0.0,0.9996364308288564,9.412014619838736,0.0703125,4
+synthetic_fixture,numpy,POS,mask,,,,,,0
+synthetic_fixture,numpy,CHROM,original,72.0703125,0.0,1.0,9.422791237826448,0.0703125,4
+synthetic_fixture,numpy,CHROM,blur,72.0703125,0.0,0.9999914268161565,9.435707396867954,0.0703125,4
+synthetic_fixture,numpy,CHROM,pixelate,72.0703125,0.0,0.9996372434614136,9.425153264567076,0.0703125,4
+synthetic_fixture,numpy,CHROM,mask,,,,,,0

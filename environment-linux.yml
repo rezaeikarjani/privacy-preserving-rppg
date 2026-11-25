@@ -1,0 +1,15 @@
+# Bootstrap recipe, NOT executed here. CPU classical comparison first.
+name: rppg-privacy
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.26
+  - scipy=1.11
+  - pandas=2.2
+  - matplotlib=3.8
+  - opencv=4.10
+  - pytest
+  - pip:
+      - pyvhr-cpu==1.0.2

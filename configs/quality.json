@@ -1,0 +1,7 @@
+{
+  "ratio_threshold": 1.2,
+  "min_separation_hz": 0.15,
+  "edge_margin_hz": 0.05,
+  "sensitivity_thresholds": [1.1, 1.2, 1.5],
+  "note": "Exploratory rules selected after inspecting this recording's failure. No independent validation or clinical confidence probability."
+}

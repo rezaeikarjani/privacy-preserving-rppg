@@ -1,0 +1,77 @@
+[
+  [
+    "Motivation, implementation and evidence scope",
+    [
+      [
+        "Question and scope",
+        "Can simple facial de-identification preserve remote photoplethysmography (rPPG) while reducing identity-related similarity? This CPU portfolio provides a classical baseline, controlled experiments and a descriptive embedding demonstration. It is not a reproduction of the supervisors' learned method, clinical validation or proven anonymity. Work was developed with AI assistance; the applicant must personally review and understand the implementation."
+      ],
+      [
+        "Inputs and privacy",
+        "A 30-second cartoon injects 72 BPM for engineering checks. A private facial recording has sparse Garmin processed HR, not raw PPG. Three officially research-shared UBFC Dataset 2 participants supply facial video and contact PPG. Subject 1 was previously inspected; subjects 3/4 were selected before their outcomes. Their initial video downloads were quota-blocked, then the user supplied the prescribed files locally. Both new recordings ran under strict Haar/LK and a separate automatic YuNet variant. Inputs, locations, tracking, model caches and previews remain local/ignored. No raw data, face images or embedding vectors are published/uploaded."
+      ],
+      [
+        "CPU pipeline",
+        "OpenCV face geometry defines approximate forehead and cheek patches. Equal-weight patch RGB means enter independent POS or simplified CHROM, followed by third-order zero-phase 0.7-3 Hz filtering, standardization and 2-second edge trim. HR is the dominant Welch peak (10-second segments, 4096 FFT points). Overlapping 30-second windows advance 15 seconds. Zero padding does not add physiological resolution; zero-phase processing is offline. Original geometry is reused across variants, so transformed-only detection is not assumed to work. Blur sigma / face size is 0.10, pixelation grid is 8x8, and black masking is a negative control."
+      ],
+      [
+        "Reproducibility and upstream comparisons",
+        "macOS arm 64, Anaconda Python 3.13.5; scientific dependencies and settings are recorded. pyVHR-cpu 1.0.2 unmodified CPU methods ran through an isolated loader, not the full video Pipeline. POS matched local aggregate HR and correlated about 0.99997 on private traces. rPPG-Toolbox classical POS ran at commit b7500b848f84ad7f86e277b4612563b69f4f88f9 with explicit NumPy 2 np.mat compatibility; waveform correlations were about 0.974-0.977. Its internal filters differ. No neural training, CUDA, CSC job or full dataset-loader benchmark ran."
+      ],
+      [
+        "Verification and literature",
+        "43 project tests pass, including signal recovery, failures, timestamps, duplicate handling, target filtering and embedding validity. Synthetic recovery is 72.07 BPM versus 72 injected; this is not human accuracy. Configurations, source/model hashes, logs and separate result folders preserve experiment scope. Savic and Zhao [1] motivate joint utility/privacy evaluation; Wei et al. [2] provide wider privacy context. PhysFormer [3] and Contrast-Phys+ [4] motivate future learned/label-efficient work. Accessible primary abstracts/records and author README were consulted; full-text critical reading remains incomplete."
+      ]
+    ]
+  ],
+  [
+    "Expanded tests, failures and reference uncertainty",
+    [
+      [
+        "Sampling and fixed settings",
+        "Subject 1 is a development case: strict Haar/LK fails on a shirt false-positive, a manual-region fallback completes, and a later YuNet variant detects all 1547 frames. The newly supplied subjects 3/4 were not used to adjust the signal or quality rules. Both automatic detector conditions complete without manual regions. Subject 3 contributes two overlapping 30-second windows; subject 4 contributes one. This is only three distinct new intervals from two people, not 18 independent observations when six method/variant combinations are applied. Settings and model versions were fixed before new outcomes."
+      ],
+      [
+        "Actual expanded HR results",
+        "Against the fixed contact-PPG spectral reference, YuNet POS MAE (original/blur/pixelation) is 1.95/8.66/8.44 BPM on subject 3 and 0.43/0.43/0.43 on subject 4. YuNet CHROM is 1.08/0.87/7.14 on subject 3 and 0.43/0.43/0.43 on subject 4. Original Haar/LK on subject 3 gives POS 37.66/25.97/15.37 and CHROM 0.00/0.43/14.50 BPM; on subject 4 POS is 0.43/0.43/0.43 and CHROM 0.87/0.43/0.43. Every condition is retained; detector choice is not selected per person for favourable error. Black-mask signals are invalid, not zero-error successes. A matching spectral bin does not mean perfect accuracy."
+      ],
+      [
+        "The reference is not unquestionable truth",
+        "Subject3 contact PPG has competing components. Welch selects 87.43/84.84 BPM, with next peaks 100.85/104.31. A post-hoc audit finds median detected pulse-interval HR 98.49 across 12 fixed filter/polarity/prominence settings; span-count summaries are 94.28-96.17 and device HR 100.95/104.56. Native-time Lomb-Scargle strongest peaks are 101.40/89.82. Duration endpoints differ by less than 0.15 s across recordings, without a gross global scale mismatch. These methods estimate different summaries and processing choices matter; none is independently adjudicated truth. All settings are retained, baselines unchanged. Errors and warning labels remain conditional on the original spectral-reference estimate, not clinical accuracy. See docs/REFERENCE_AUDIT.md."
+      ],
+      [
+        "Quality rule: both missed events and false alarms",
+        "The post-hoc rule warns for strongest/distinct-competitor ratio below 1.2 or a dominant peak near the band edge. This caught the earlier private POS peak switch (64.6 to 44.8 BPM), but does not guarantee correct HR. For new non-mask assessments, error >5 BPM vs the fixed reference gives Haar TP 4/FP 5/FN 3/TN 6 and YuNet TP 2/FP 6/FN 1/TN 9. There are 18 correlated assessments per detector, sharing only three temporal intervals; six share the same ambiguous contact-reference interval. These are descriptive counts, not validated classifier performance. No threshold was changed after these results."
+      ],
+      [
+        "Interpretation and supporting preservation experiments",
+        "Results vary substantially across people, detector geometry and transformations. The earlier subject 1 low errors are not representative of all recordings. Reference uncertainty prevents treating every deviation as genuine physiological failure. Private strength sweeps show waveform correlation declining with more blur/pixelation; stable aggregate HR can conceal window failures. Original geometry is reused for transformed variants, and signed zero-lag correlation may preserve shared artifacts. Spectral-concentration ratio is a surrogate, not GT SNR. Full participant/window tables and raw failure logs are preserved in the experiment folders and docs/EXPANDED_VALIDATION.md."
+      ]
+    ]
+  ],
+  [
+    "Three-identity embedding experiment and honest claims",
+    [
+      [
+        "Model and temporal split",
+        "Official OpenCV Zoo YuNet 2023mar (MIT) and SFace 2021dec (Apache 2.0) run on CPU at pinned revision 48b10fa505aeb51fbd127fc60a5c660040e823b7 with hashes. Original frames at 5/10/15 s of subjects 1/3/4 form three normalized 128-dimensional enrollment templates. Probes at 30/35/40 s give nine images, each compared with its genuine template and two impostors. Enrollment/probes use different frames but the SAME capture session per person. All required enrollment and original-probe detections succeeded. No new private identities, real-world names or recognition thresholds are inferred."
+      ],
+      [
+        "Measured similarities and detection failures",
+        "Mean genuine cosine is 0.983510 original, 0.125149 blur, 0.201605 pixelation and 0.146126 mask. Unique own-template rank 1 matches are 9/9, 6/9, 8/9 and 6/9 respectively. Genuine must strictly exceed both impostor scores; ties are not successes. Closed-set ranking forces a choice among only three templates even when scores are low; it is not calibrated verification. Original landmarks align transformed probes, an explicit assistance condition. Separate re-detection succeeds 9/9 on original and 0/9 on transformed probes; missing end-to-end similarities are undefined, not zero or anonymity. Images/embedding vectors are not saved."
+      ],
+      [
+        "Privacy interpretation",
+        "Lower cosine did not consistently remove own-template ranking. Even the masked control yields 6/9 matches, highlighting possible residual context/geometry and model/gallery bias; this is not proof of recovering facial biometrics through a mask. The cause is unresolved. Three correlated probes per identity and two impostors cannot establish anonymity or general re-identification performance. Independent-session enrollment, larger cohorts and cross-model tests are needed. Assisted identity geometry differs from the YuNet physiological experiment; do not merge them into a matched privacy/utility frontier."
+      ],
+      [
+        "Strongest current claim and next work",
+        "The portfolio provides a reproducible CPU baseline with controlled preservation experiments, three public participants, two automatic detector conditions, upstream comparisons, descriptive quality warnings and a small embedding cohort. It records poor outcomes and reference uncertainty rather than claiming universal sub-1-BPM errors. Strongest claim: practical implementation and evaluation with explicit limits, not anonymous video or clinical validation. Next: reference adjudication, challenging independent data, independent identity sessions, full-text critical reading and interview rehearsal. Publication requires explicit permission; CSC remains optional."
+      ],
+      [
+        "Selected references and artifacts",
+        "[1] Savic & Zhao, De-identification of facial videos while preserving remote physiological utility, BMVC 2023, proceedings.bmvc2023.org/230/. [2] Wei, Yu & Zhao, TPAMI 2026, doi:10.1109/TPAMI.2026.3718681. [3] Yu et al., PhysFormer, CVPR 2022, oulurepo.oulu.fi/handle/10024/43584. [4] Sun & Li, Contrast-Phys+, TPAMI 2024, doi:10.1109/TPAMI.2024.3367910. [5] Bobbia et al., Unsupervised skin tissue segmentation for remote photoplethysmography, PRL 2017; UBFC official page sites.google.com/view/ybenezeth/ubfcrppg. Full protocols/results: README and docs/QUALITY.md, STRENGTH_SWEEP.md, EXTERNAL_VALIDATION.md, IDENTITY_DEMO.md and EXPANDED_VALIDATION.md."
+      ]
+    ]
+  ]
+]
